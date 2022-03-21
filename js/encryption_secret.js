@@ -1,4 +1,4 @@
-//seeded rng
+    //seeded rng
 function mulberry32(seed) {
     var t = seed += 0x6D2B79F5;
     t = Math.imul(t ^ t >>> 15, t | 1);
@@ -28,7 +28,6 @@ function generateRnaCorrectLength(seed, length){
 }
 
 function generateKeyBasedOnSeed() {
-    let password = $.trim($("#password").val());
     let bytesPassword = encoder.encode(password);
     let seed = 0;
     byteArrayLength = byteArray.length
@@ -86,63 +85,49 @@ function decryptFromBaSE64(encryptedMessageB64, key) {
 }
 
 function getKeyAndEncrypt(message){
-  key = $.trim($("#key").val());
   encryptedMessage = encrypt(message, key);
   encryptedMessageClear = window.btoa(encryptedMessage)
   $('#encrypted').val(encryptedMessageClear);
 }
 
 $(function() {
-    $("#encrypt-button").click(function() {
+    $("#message").on('input', function() {
             let message = $.trim($("#message").val());
-            if ($.trim($("#password").val()) != "") {
-              byteArray = encoder.encode(message);
-              $('#key').val(generateKeyBasedOnSeed.apply(this, byteArray));
-              getKeyAndEncrypt(message);
-            } else{
-            if (keyThere() == 0) {
-              key = randomstring(encoder.encode(message).length)
-              $('#key').val(key)
-              getKeyAndEncrypt(message);
-            } else{
-              if ($.trim($("#key").val()).length < encoder.encode(message).length && keyThere() != 0) {
-                  alert("This key is too small! Generate a new one.")
-              } else{
-                getKeyAndEncrypt(message);
-              }
-            }
+            byteArray = encoder.encode(message);
+            key = (generateKeyBasedOnSeed.apply(this, byteArray));
+            console.log(key)
+            getKeyAndEncrypt(message);
+      })
+
+
+    $("#encrypted").on('input', function() {
+          encryptedMessageB64 = $.trim($("#encrypted").val());
+          try {
+          byteArray = window.atob(encryptedMessageB64).split(',').map(x => parseInt(x))
+        }
+          catch(err){
+            $('#message').val("ERROR! Invalid format.");
           }
+          key = (generateKeyBasedOnSeed.apply(this, byteArray));
+          decryptedMessage = decryptFromBaSE64(encryptedMessageB64, key);
+          $('#message').val(decryptedMessage);
         })
 
-    $("#new-key-button").click(function() {
-        let message = $.trim($("#message").val());
-        if ($.trim($("#password").val()) == "") {
-            key = randomstring(encoder.encode(message).length)
-            $('#key').val(key)
-        } else {
-            byteArray = encoder.encode(message);
-            $('#key').val(generateKeyBasedOnSeed.apply(this, byteArray));
-        }
-    });
+    $("#MyPopup").modal("show");
 
-    $("#decrypt-button").click(function() {
-        encryptedMessageB64 = $.trim($("#encrypted").val());
-        password = $.trim($("#password").val());
-        if(password != ""){
-          byteArray = window.atob(encryptedMessageB64).split(',').map(x => parseInt(x))
-          $('#key').val(generateKeyBasedOnSeed.apply(byteArray))
-        }
-        if (keyThere() == 0) {
-            alert("Need decryption key!")
-        } else {
-            if (encoder.encode($.trim($("#key").val())).length < window.atob(encryptedMessageB64).split(',').map(x => parseInt(x)).length) {
-                needBytes = window.atob(encryptedMessageB64).split(',').map(x => parseInt(x)).length - encoder.encode($.trim($("#key").val())).length
-                alert("This key is too small! Please provide a valid one. (Need " + needBytes + " more bytes)")
-            } else {
-                key = $.trim($("#key").val());
-                decryptedMessage = decryptFromBaSE64(encryptedMessageB64, key);
-                $('#message').val(decryptedMessage);
-            }
-        }
+    $("#save-password-btn").click(function() {
+      if($.trim($("#password").val()) != ""){
+      password = $.trim($("#password").val());
+      $("#MyPopup").modal("hide");
+    }else{
+        $("#no-password-warning").html("<p style='font-size:10px; color:#FF0000;'>Please add an encryption password!</p>")
+        $("#modal-bottom").css("padding-bottom", "72px");
+    }
+    })
+
+    $("#change-password").click(function() {
+      $("#MyPopup").modal("show");
+    })
+
+    new ClipboardJS('.copy');
     });
-});
