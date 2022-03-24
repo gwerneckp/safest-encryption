@@ -49,9 +49,9 @@ app.get('/index', (req, res) => {
   res.sendFile(__dirname + '/static/index.html')
 });
 
-app.get('/real_time', (req, res) => {
+app.get('/custom', (req, res) => {
   res.set('Access-Control-Allow-Origin', '*')
-  res.sendFile(__dirname + '/static/real_time.html')
+  res.sendFile(__dirname + '/static/custom.html')
 });
 
 app.get('/chat', (req, res) => {
