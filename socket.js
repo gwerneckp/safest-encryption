@@ -1,13 +1,33 @@
 const express = require('express')
 const {Server} = require('socket.io')
+var https = require('https')
 const http = require('http')
+var fs = require('fs');
 var path = require('path')
 
+var options = {
+  key: fs.readFileSync('/etc/letsencrypt/live/safestencryption.com/privkey.pem'),
+  cert: fs.readFileSync('/etc/letsencrypt/live/safestencryption.com/fullchain.pem')
+};
 
 const app = express();
-const server = http.createServer(app)
-const io = new Server(server)
+var httpServer = http.createServer(app);
+var httpsServer = https.createServer(options, app);
 
+httpServer.listen(80);
+httpsServer.listen(443);
+
+const io = new Server(httpsServer)
+
+app.enable('trust proxy')
+app.use(function(request, response, next) {
+
+    if (process.env.NODE_ENV != 'development' && !request.secure) {
+       return response.redirect("https://" + request.headers.host + request.url);
+    }
+
+    next();
+})
 
 app.options('*', (req, res) => {
   res.set('Access-Control-Allow-Origin', '*')
@@ -29,16 +49,15 @@ app.get('/index', (req, res) => {
   res.sendFile(__dirname + '/static/index.html')
 });
 
-app.get('/real_time', (req, res) => {
+app.get('/custom', (req, res) => {
   res.set('Access-Control-Allow-Origin', '*')
-  res.sendFile(__dirname + '/static/real_time.html')
+  res.sendFile(__dirname + '/static/custom.html')
 });
 
 app.get('/chat', (req, res) => {
   res.set('Access-Control-Allow-Origin', '*')
   res.sendFile(__dirname + '/static/chat.html')
 });
-
 
 app.use(express.static(path.join(__dirname, 'static')))
 app.use('/assets', express.static('assets'));
@@ -65,8 +84,3 @@ io.on('connection', function(socket){
     })
 
 })
-
-
-server.listen(80, () => {
-  console.log('listening on *:80')
-});
