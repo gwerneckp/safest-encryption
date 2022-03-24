@@ -21,26 +21,27 @@ app.get('/socket.io.js', (req, res) => {
 
 app.get('/', (req, res) => {
   res.set('Access-Control-Allow-Origin', '*')
-  res.sendFile(__dirname + '/client/index.html')
+  res.sendFile(__dirname + '/static/index.html')
 });
 
 app.get('/index', (req, res) => {
   res.set('Access-Control-Allow-Origin', '*')
-  res.sendFile(__dirname + '/client/index.html')
+  res.sendFile(__dirname + '/static/index.html')
 });
 
 app.get('/real_time', (req, res) => {
   res.set('Access-Control-Allow-Origin', '*')
-  res.sendFile(__dirname + '/client/real_time.html')
+  res.sendFile(__dirname + '/static/real_time.html')
 });
 
 app.get('/chat', (req, res) => {
   res.set('Access-Control-Allow-Origin', '*')
-  res.sendFile(__dirname + '/client/chat.html')
+  res.sendFile(__dirname + '/static/chat.html')
 });
 
 
-app.use(express.static(path.join(__dirname, 'client')))
+app.use(express.static(path.join(__dirname, 'static')))
+app.use('/assets', express.static('assets'));
 
 usersConnected = 0
 
