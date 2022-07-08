@@ -2486,8 +2486,6 @@ textarea.form-control-lg {
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
-  -webkit-print-color-adjust: exact;
-  color-adjust: exact;
 }
 .form-check-input[type=checkbox] {
   border-radius: 0.25em;
@@ -3928,7 +3926,7 @@ textarea.form-control-lg {
   color: #1c1c1c;
 }
 .dropdown-menu-dark .dropdown-divider {
-  border-color: #1c1c1c);
+  border-color: #1c1c1c;
 }
 .dropdown-menu-dark .dropdown-item-text {
   color: #1C1C1C;
@@ -7952,7 +7950,7 @@ textarea.form-control-lg {
 
 .bg-dark2 {
   --bs-bg-opacity: 1;
-  background-color:#161616, var(--bs-bg-opacity)) !important;
+  background-color:#161616, var(--bs-bg-opacity) !important;
 }
 
 .bg-black {
