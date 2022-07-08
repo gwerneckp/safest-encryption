@@ -22,7 +22,7 @@ if (fs.existsSync(keysPath + "/privkey.pem") && fs.existsSync(keysPath + "/fullc
   var httpsServer = https.createServer(options, app);
   httpsServer.listen(httpsPort);
   var io = new Server(httpsServer);
-  console.log("HTTPS server listening on port " + httpsServer);
+  console.log("HTTPS server listening on port " + httpsPort);
 
   app.enable("trust proxy");
   app.use((req, res, next) => {
