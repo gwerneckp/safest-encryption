@@ -4237,4 +4237,7 @@
   return lookup;
 
 }));
+
+console.log('Loaded socket.io.js module')
+
 //# sourceMappingURL=socket.io.js.map

@@ -1,8 +1,6 @@
 :root {
     --background: #18BC9C;
-    --white: rgb(255, 255, 255);
     --white-complemetary: rgba(255, 255, 255, 0.75);
-    --black: rgb(0, 0, 0);
     --black-complemetary: rgba(0, 0, 0, 0.75);
     --primary-color: rgb(44, 62, 80);
     --primary-color-complementary: rgba(44, 62, 80, 0.75);
@@ -32,7 +30,7 @@ div {
 
 h1 {
     font-size: 25px;
-    color: var(--white);
+    color: white;
 }
 
 textarea {
@@ -43,7 +41,7 @@ textarea {
 
 .title {
     text-decoration: none;
-    color: var(--white);
+    color: white;
     text-shadow: 0px;
     transition-property: font-size, text-shadow;
     transition-duration: 0.15s;
@@ -51,31 +49,31 @@ textarea {
 
 .title:hover {
     text-shadow: 0px 2.5px 10px black;
-    color: var(--white);
+    color: white;
     font-size: 27.5px;
 }
 
 .encrypted-textarea {
     background-color: var(--primary-color);
-    color: var(--white);
+    color: white;
     height: calc(28.25% + 28.25% + 4% + 30px + 30px + 48px + calc(4 * var(--padding)* 2));
 }
 
 .passphrase-textarea {
     background-color: var(--primary-color);
-    color: var(--white);
+    color: white;
     height: 4%;
 }
 
 .clear-textarea {
-    background-color: var(--white);
-    color: var(--black);
+    background-color: white;
+    color: black;
     height: 28.25%;
 }
 
 .key-textarea {
-    background-color: var(--black);
-    color: var(--white);
+    background-color: black;
+    color: white;
     height: 28.25%;
 }
 
@@ -88,22 +86,22 @@ textarea {
 
 .encrypted-title {
     background-color: var(--primary-color-complementary);
-    color: var(--white);
+    color: white;
 }
 
 .passphrase-title {
     background-color: var(--primary-color-complementary);
-    color: var(--white);
+    color: white;
 }
 
 .clear-title {
     background-color: var(--white-complemetary);
-    color: var(--black);
+    color: black;
 }
 
 .key-title {
     background-color: var(--black-complemetary);
-    color: var(--white);
+    color: white;
 }
 
 .btn-wrapper {
@@ -113,7 +111,7 @@ textarea {
 
 .btn {
     grid-area: 'btn';
-    color: var(--white);
+    color: white;
     background-color: var(--button-color);
     border-color: var(--button-color-border);
     border-radius: 10px;
@@ -125,7 +123,7 @@ textarea {
 }
 
 .btn:hover {
-    color: var(--white);
+    color: white;
     background-color: var(--button-color-hover);
     border-color: var(--button-color-hover-border);
     font-size: 1.35em;
@@ -312,9 +310,10 @@ textarea {
     margin: auto;
 }
 
-.modal-content:hover{
+.modal-content:hover {
     transform: scale(1.015);
 }
+
 .modal-textarea {
     border-color: rgba(0, 0, 0, 0);
     border-radius: 0px;
@@ -331,6 +330,7 @@ textarea {
 .black-background {
     background-color: black;
 }
+
 .modal-save {
     transform: scale(1);
     border-radius: 0px 0px 10px 10px;
@@ -340,7 +340,7 @@ textarea {
     width: 100%;
     height: 40px;
     background-color: var(--black-complemetary);
-    color: var(--white);
+    color: white;
     border-color: rgba(0, 0, 0, 0);
 }
 
@@ -362,4 +362,79 @@ textarea {
     color: #000;
     text-decoration: none;
     cursor: pointer;
+}
+
+.chat-area {
+    overflow-y: scroll;
+    height: 60%;
+}
+
+.chat-buttons {
+    height: 20%;
+}
+
+.send-title {
+    width: 100%;
+    height: 30px;
+    background-color: rgba(255, 255, 255, 0.75);
+    padding-top: 4.5px;
+    border-radius: 5px 5px 0px 0px;
+}
+
+.send-textarea {
+    width: 100%;
+    height: 40%;
+    background-color: #ffffff;
+    color: #000;
+    border-color: #ffffff;
+    border-radius: 0px 0px 8px 8px;
+}
+
+.background-color {
+    background-color: var(--background);
+}
+
+.chat-button {
+    transition-property: transform box-shadow;
+    transition-duration: 0.15s;
+    box-shadow: 0px;
+    transform: scale(1);
+    font-size: 16px;
+    border-radius: 10px;
+    border-color: rgba(0, 0, 0, 0);
+}
+
+.chat-button:hover {
+    cursor: pointer;
+    transform: scale(1.05);
+    box-shadow: 0px 2.5px 10px rgba(0, 0, 0, 0.25);
+}
+
+.chat-send-button {
+    width: 55%;
+    height: 45px;
+    font-weight: bold;
+}
+
+.chat-secondary-button {
+    color: white;
+    background-color: var(--button-color);
+    width: 30%;
+    height: 40px;
+    font-weight: bold;
+}
+
+.users-online {
+    color: white;
+}
+
+.chat-message-padding {
+    padding: 8px;
+}
+
+.chat-message {
+    background-color: #ffffff;
+    padding: 5px;
+    border-radius: 10px;
+    word-wrap: break-word;
 }

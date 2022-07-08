@@ -17,30 +17,32 @@
   <link href="css/style.css" rel="stylesheet" />
   <!-- </css> -->
   <!-- <js> -->
-   <script src="js/encryption.js"></script>
+  <script src="js/encryption.js"></script>
   <script src="js/custom.js"></script>
   <!-- </js> -->
 </head>
-<div id="modal" class="modal" role="dialog">
-  <div class="modal-content modal-password">
-    <span class="modal-close"></span>
-    <div class="key-title textarea-title vertical-center center">
-      CUSTOM PASSPHRASE
-    </div>
-    <textarea
-      id="password"
-      class="key-textarea textarea modal-textarea"
-    ></textarea>
-    <div class="black-background">
-      <p id='modal-error' class="center modal-error">Please add an encryption password!</p>
-    </div>
-    <button id="save-button" class="modal-save vertical-center center">
-      <p>SAVE PASSPHRASE</p>
-    </button>
-  </div>
-</div>
-
 <body>
+  <div id="modal" class="modal" role="dialog">
+    <div class="modal-content modal-password">
+      <span class="modal-close"></span>
+      <div class="key-title textarea-title vertical-center center">
+        CUSTOM PASSPHRASE
+      </div>
+      <textarea
+        id="password"
+        class="key-textarea textarea modal-textarea"
+      ></textarea>
+      <div class="black-background">
+        <p id="modal-error" class="center modal-error">
+          Please add an encryption password!
+        </p>
+      </div>
+      <button id="save-button" class="modal-save vertical-center center">
+        <p>SAVE PASSPHRASE</p>
+      </button>
+    </div>
+  </div>
+
   <nav>
     <h1 class="text-center">
       <a href="/" class="title">SAFEST ENCRYPTION!</a>
