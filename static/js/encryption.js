@@ -59,7 +59,6 @@ const byteArrayToUtf8 = (byteArray) => {
     const decoder = new TextDecoder()
     const arrayBuffer = new Uint8Array(byteArray)
     const utf8String = decoder.decode(arrayBuffer)
-    console.log(utf8String)
     return utf8String
 }
 

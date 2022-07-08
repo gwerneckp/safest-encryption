@@ -80,8 +80,6 @@ textarea {
 }
 
 .textarea-title {
-    display: flex;
-    align-items: center;
     width: 100%;
     height: 30px;
     padding-top: 4.5px;
@@ -114,8 +112,7 @@ textarea {
 }
 
 .btn {
-    display: inline-flex;
-    align-items: center;
+    grid-area: 'btn';
     color: var(--white);
     background-color: var(--button-color);
     border-color: var(--button-color-border);
@@ -124,7 +121,7 @@ textarea {
     transition-property: font-size;
     transition-duration: 0.15s;
     font-size: 1.25em;
-    cursor:pointer;
+    cursor: pointer;
 }
 
 .btn:hover {
@@ -154,14 +151,39 @@ textarea {
 .flex {
     display: flex;
     height: 95%;
-    flex-direction:flex ;
+    flex-direction: flex;
 }
 
-.column{
+.column {
+    grid-area: 'column';
     margin-right: calc(2*var(--padding));
     margin-left: calc(2*var(--padding));
     width: 50%;
     height: 100vh;
+}
+
+.vertical-center {
+    display: flex;
+    align-items: center;
+
+}
+
+.center {
+    display: flex;
+    justify-content: center;
+}
+
+.grid-child {
+    width: 100%;
+    height: 100%;
+}
+
+.height-75 {
+    height: 75%;
+}
+
+.height {
+    height: calc(100% - 48px);
 }
 
 @font-face {
@@ -184,70 +206,160 @@ textarea {
     margin-left: auto;
 }
 
-@media (max-width:767px){
-    .btn {
+@media (max-width:767px) {
+    .btn-responsive {
         font-size: 0.30em;
     }
-    .btn:hover {
+
+    .btn-responsive:hover {
         font-size: 0.40em;
     }
-    
+
 }
 
-@media (min-width:507px){
-    .btn {
+@media (min-width:507px) {
+    .btn-responsive {
         font-size: 0.65em;
     }
-    .btn:hover {
+
+    .btn-responsive:hover {
         font-size: 0.75em;
     }
-    
+
 }
 
 @media (min-width: 768px) {
-    .btn {
+    .btn-responsive {
         font-size: 0.85em;
     }
-    .btn:hover{
-        font-size:0.95em;
+
+    .btn-responsive:hover {
+        font-size: 0.95em;
     }
+
     .my-container {
         width: 750px;
     }
 }
 
 @media (min-width: 992px) {
-    .btn{
-        font-size:1.25em;
+    .btn-responsive {
+        font-size: 1.25em;
     }
-    .btn:hover{
-        font-size:1.35em;
+
+    .btn-responsive:hover {
+        font-size: 1.35em;
     }
+
     .my-container {
         width: 970px;
     }
 }
 
 @media (min-width: 1200px) {
-    .btn{
-        font-size:1.25em;
+    .btn-responsive {
+        font-size: 1.25em;
     }
-    .btn:hover{
-        font-size:1.35em;
+
+    .btn-responsive:hover {
+        font-size: 1.35em;
     }
+
     .my-container {
         width: 1170px;
     }
 }
 
 @media (min-width: 1425px) {
-    .btn{
-        font-size:1.25em;
+    .btn-responsive {
+        font-size: 1.25em;
     }
-    .btn:hover{
-        font-size:1.35em;
+
+    .btnresponsive:hover {
+        font-size: 1.35em;
     }
+
     .my-container {
         width: 1295;
     }
+}
+
+/* modal stolen from stackoverflow */
+.modal {
+    transition-duration: 0.15s;
+    transition-property: display;
+    display: none;
+    position: fixed;
+    z-index: 1;
+    padding-top: 14%;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(0, 0, 0);
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+/* Modal Content */
+.modal-content {
+    transform: scale(1);
+    transition-duration: 0.15s;
+    transition-property: transform;
+    background-color: rgba(0, 0, 0, 0);
+    border-color: rgba(0, 0, 0, 0);
+    width: 30%;
+    margin: auto;
+}
+
+.modal-content:hover{
+    transform: scale(1.015);
+}
+.modal-textarea {
+    border-color: rgba(0, 0, 0, 0);
+    border-radius: 0px;
+}
+
+.modal-error {
+    display: none;
+    color: red;
+    font-size: 12px;
+    margin: 0px;
+    padding: 15px;
+}
+
+.black-background {
+    background-color: black;
+}
+.modal-save {
+    transform: scale(1);
+    border-radius: 0px 0px 10px 10px;
+    transition-property: transform border-radius;
+    transition-duration: 0.15s;
+    cursor: pointer;
+    width: 100%;
+    height: 40px;
+    background-color: var(--black-complemetary);
+    color: var(--white);
+    border-color: rgba(0, 0, 0, 0);
+}
+
+.modal-save:focus {
+    border-radius: 5px;
+    transform: scale(1.015);
+}
+
+/* The Close Button */
+.modal-close {
+    color: #aaaaaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.modal-close:hover,
+.modal-close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
 }
