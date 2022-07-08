@@ -1,11 +1,11 @@
-function mulberry32(seed) {
+const mulberry32 = (seed) =>  {
     let t = seed += 0x6D2B79F5;
     t = Math.imul(t ^ t >>> 15, t | 1);
     t ^= t + Math.imul(t ^ t >>> 7, t | 61);
     return ((t ^ t >>> 14) >>> 0) / 4294967296;
 }
 
-function numberArrayToString(randomArray) {
+const numberArrayToString = (randomArray) =>  {
     const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
     let key = '';
     for (let i = 0; i < randomArray.length; i++) {
@@ -14,7 +14,7 @@ function numberArrayToString(randomArray) {
     return key;
 }
 
-function seedToNumberArray(seed, length){
+const seedToNumberArray = (seed, length) => {
   const salt = 1000000000
   let randomNumber = mulberry32(seed);
   let randomArray = [];
@@ -25,7 +25,7 @@ function seedToNumberArray(seed, length){
   return randomArray
 }
 
-function passwordToSeed(password) {
+const passwordToSeed = (password) =>  {
     const encoder = new TextEncoder
     let bytesPassword = encoder.encode(password);
     var long = 0;
@@ -41,7 +41,7 @@ function passwordToSeed(password) {
     // return seededBasedKey
 }
 
-function randomString(length) {
+const randomString = (length) =>  {
     let result = '';
     const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
     for (var i = 0; i < length; i++) {
@@ -50,12 +50,12 @@ function randomString(length) {
     return result;
 }
 
-function utf8toByteArray(str) {
+const utf8toByteArray = (str) =>  {
     const encoder = new TextEncoder()
     return encoder.encode(str)
 }
 
-function byteArrayToUtf8(byteArray){
+const byteArrayToUtf8 = (byteArray) => {
     const decoder = new TextDecoder()
     const arrayBuffer = new Uint8Array(byteArray)
     const utf8String = decoder.decode(arrayBuffer)
@@ -63,7 +63,7 @@ function byteArrayToUtf8(byteArray){
     return utf8String
 }
 
-function xorEncrypt(byteArray1, byteArray2) {
+const xorEncrypt = (byteArray1, byteArray2) => {
     let encryptedByteArray = []
     for (var i = 0; i < byteArray1.length; i++) {
         encryptedByteArray.push(byteArray1[i] ^ byteArray2[i])
@@ -72,7 +72,7 @@ function xorEncrypt(byteArray1, byteArray2) {
 }
 
 //credits: brandonscript
-function utf8ToBase64(utf8String){
+const utf8ToBase64 = (utf8String) => {
     return btoa(encodeURIComponent(utf8String).replace(/%([0-9A-F]{2})/g,
             function toSolidBytes(match, p1) {
                 return String.fromCharCode('0x' + p1);
@@ -82,7 +82,7 @@ function utf8ToBase64(utf8String){
   }
 
 //credits: brandonscript
-function base64ToUtf8(b64Encoded){
+const base64ToUtf8 = (b64Encoded) => {
     return decodeURIComponent(atob(b64Encoded).split('').map(function(c) {
         return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
     }).join(''));
