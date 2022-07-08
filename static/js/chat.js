@@ -2,11 +2,23 @@ const element = (id) => {
   return document.getElementById(id);
 };
 
+const socket = io();
+
+const sendMessage = () => {
+  let message = element("message").value.trim()
+    if (message != "") {
+      let password = element("password").value.trim();
+      let key = numberArrayToString(seedToNumberArray(passwordToSeed(password), utf8toByteArray(message).length));
+      let encrypted = utf8ToBase64(byteArrayToUtf8(xorEncrypt(utf8toByteArray(message), utf8toByteArray(key))));
+      socket.emit("chat", encrypted);
+      element("message").value = "";
+      element('message').focus();
+    }
+}
 document.addEventListener("DOMContentLoaded", () => {
 
   element("modal").style.display = "block";
 
-  const socket = io();
 
   socket.on("chat", (encrypted) => {
     let password = element("password").value.trim();
@@ -40,16 +52,14 @@ document.addEventListener("DOMContentLoaded", () => {
     element("online").innerHTML = "Online users: " + users;
   });
 
-  element("send-message").addEventListener("click", () => {
-    let message = element("message").value.trim()
-    if (message != "") {
-      let password = element("password").value.trim();
-      let key = numberArrayToString(seedToNumberArray(passwordToSeed(password), utf8toByteArray(message).length));
-      let encrypted = utf8ToBase64(byteArrayToUtf8(xorEncrypt(utf8toByteArray(message), utf8toByteArray(key))));
-      socket.emit("chat", encrypted);
-      element("message").value = "";
+  element("send-message").addEventListener("click", sendMessage());
+
+  element("message").addEventListener("keypress", (e) =>{
+    if(e.key === 'Enter'){
+      sendMessage()
     }
-  });
+  })
+
 
   element("change-password").addEventListener("click", () => {
     element("modal").style.display = "block";
