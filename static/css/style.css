@@ -433,8 +433,17 @@ textarea {
 }
 
 .chat-message {
+    transform: scale(1);
+    transition-property: transform filter;
+    transition-duration: 0.15s;
+    filter: drop-shadow(0px);
     background-color: #ffffff;
     padding: 5px;
     border-radius: 10px;
     word-wrap: break-word;
+}
+
+.chat-message:hover {
+    transform: scale(1.003);
+    filter: drop-shadow(0px 2.5px 5px rgba(0,0,0,0.5));
 }

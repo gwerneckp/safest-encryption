@@ -22,14 +22,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
     element("chat-area").innerHTML =
       element("chat-area").innerHTML +
-      '<div class="message-padding"><div class="chat-message">' +
+      '<div class="chat-message-padding"><div class="chat-message">' +
       clear +
       "</div></div>";
 
-    // $("#chat-area").animate(
-    //   { scrollTop: $("#chat-area")[0].scrollHeight },
-    //   1000
-    // );
+
+    element("chat-area").scrollTop = element("chat-area").scrollHeight
+
   });
 
   socket.on("panic", () => {
@@ -38,14 +37,14 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   socket.on("users", (users) => {
-    $("online").innerHTML("Online users: " + users);
+    element("online").innerHTML = "Online users: " + users;
   });
 
-  element("send-message").click(function () {
+  element("send-message").addEventListener("click", () => {
     let message = element("message").value.trim()
     if (message != "") {
       let password = element("password").value.trim();
-      let key = numberArrayToString(seedToNumberArray(passwordToSeed(password), utf8toByteArray(clear).length));
+      let key = numberArrayToString(seedToNumberArray(passwordToSeed(password), utf8toByteArray(message).length));
       let encrypted = utf8ToBase64(byteArrayToUtf8(xorEncrypt(utf8toByteArray(message), utf8toByteArray(key))));
       socket.emit("chat", encrypted);
       element("message").value = "";
