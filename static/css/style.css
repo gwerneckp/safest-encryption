@@ -445,5 +445,5 @@ textarea {
 
 .chat-message:hover {
     transform: scale(1.003);
-    filter: drop-shadow(0px 2.5px 5px rgba(0,0,0,0.5));
+    filter: drop-shadow(0px 2.5px 5px rgba(0, 0, 0, 0.5));
 }

@@ -89,4 +89,42 @@ const base64ToUtf8 = (b64Encoded) => {
     // return string
 }
 
+const help = () => {
+    console.log(`Encryption.js help:
+
+mulberry32(number) 🡆 number
+Takes seed and returns pseudo-random number between 0 and 1
+    
+numberArrayToString(array<number>) 🡆 string
+Takes array of numbers and returns a string using the following characters.
+
+seedToNumberArray(seed:number, lenght:number) 🡆 array<number>
+Takes a seed and a lenght and returns a number array of that lenght.
+
+passwordToSeed(string) 🡆 number
+Takes a string and returns a number seed.
+
+randomString(number) 🡆 string
+Takes lenght and returns string of that length with the following characters:
+'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
+
+utf8toByteArray(string) 🡆 byte array
+Takes UTF-8 encoded string and returns its byte array.
+
+byteArrayToUtf8(byte array) 🡆 string
+Takes bytes array and encodes it to Unicode (UTF-8) string.
+
+xorEncrypt(byte array, byte array) 🡆 byte array
+Encrypts a byte array using XOR logical operation and key of the same length.
+
+utf8ToBase64(unicode string) 🡆 B64 string
+Converts a UTF-8 encoded string to base 64.
+
+base64ToUtf8(B64 string) 🡆 UTF-8 string
+Converts a base 64 encoded string to Unicode (UTF-8).
+
+Written by Gabriel Werneck Paiva`)
+}
+
 console.log("Loaded encryption.js module")
+console.log("Run help() for help")

@@ -1,0 +1,223 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>safestencryption</title>
+  <link rel="stylesheet" href="https://stackedit.io/style.css" />
+</head>
+
+<body class="stackedit">
+  <div class="stackedit__html"><h1 id="encryption.js">Encryption.js</h1>
+<h2 id="xor-encryption">XOR Encryption</h2>
+<p>The best form of encryption is the one where finding the key is equally difficult as finding the message. The use of the <a href="https://en.wikipedia.org/wiki/Exclusive_or">exclusive or (XOR)</a> logical operation allows us to encrypt and decrypt a message using a key of the same length as the message.</p>
+<p>The XOR (⊕) operation is only true when only one of the conditions is true.</p>
+
+<table>
+<thead>
+<tr>
+<th align="center">A</th>
+<th align="center">B</th>
+<th align="center">A ⊕ B</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">false</td>
+<td align="center">false</td>
+<td align="center"><strong>false</strong></td>
+</tr>
+<tr>
+<td align="center">false</td>
+<td align="center">true</td>
+<td align="center"><strong>true</strong></td>
+</tr>
+<tr>
+<td align="center">true</td>
+<td align="center">false</td>
+<td align="center"><strong>true</strong></td>
+</tr>
+<tr>
+<td align="center">true</td>
+<td align="center">true</td>
+<td align="center"><strong>false</strong></td>
+</tr>
+</tbody>
+</table>
+<p>Let’s take a look at this example, we are going to encrypt 8 bits with an 8-bit key.</p>
+
+<table>
+<thead>
+<tr>
+<th align="center">message</th>
+<th align="center">key</th>
+<th align="center">encrypted</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">0</td>
+<td align="center">1</td>
+<td align="center"><strong>1</strong></td>
+</tr>
+<tr>
+<td align="center">1</td>
+<td align="center">0</td>
+<td align="center"><strong>1</strong></td>
+</tr>
+<tr>
+<td align="center">0</td>
+<td align="center">1</td>
+<td align="center"><strong>1</strong></td>
+</tr>
+<tr>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center"><strong>0</strong></td>
+</tr>
+<tr>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center"><strong>0</strong></td>
+</tr>
+<tr>
+<td align="center">1</td>
+<td align="center">0</td>
+<td align="center"><strong>1</strong></td>
+</tr>
+<tr>
+<td align="center">0</td>
+<td align="center">1</td>
+<td align="center"><strong>1</strong></td>
+</tr>
+<tr>
+<td align="center">1</td>
+<td align="center">1</td>
+<td align="center"><strong>0</strong></td>
+</tr>
+</tbody>
+</table>
+<p>Again using the XOR operation, we are going to decrypt the encrypted message with the same key.</p>
+
+<table>
+<thead>
+<tr>
+<th align="center">encrypted</th>
+<th align="center">key</th>
+<th align="center">message</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">1</td>
+<td align="center">1</td>
+<td align="center"><strong>0</strong></td>
+</tr>
+<tr>
+<td align="center">1</td>
+<td align="center">0</td>
+<td align="center"><strong>1</strong></td>
+</tr>
+<tr>
+<td align="center">1</td>
+<td align="center">1</td>
+<td align="center"><strong>0</strong></td>
+</tr>
+<tr>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center"><strong>0</strong></td>
+</tr>
+<tr>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center"><strong>0</strong></td>
+</tr>
+<tr>
+<td align="center">1</td>
+<td align="center">0</td>
+<td align="center"><strong>1</strong></td>
+</tr>
+<tr>
+<td align="center">1</td>
+<td align="center">1</td>
+<td align="center"><strong>0</strong></td>
+</tr>
+<tr>
+<td align="center">0</td>
+<td align="center">1</td>
+<td align="center"><strong>1</strong></td>
+</tr>
+</tbody>
+</table>
+<p>We obtain the same initial message we encrypted.</p>
+<h2 id="functions">Functions</h2>
+<p><strong>mulberry32(number) 🡆 number</strong><br>
+Takes seed and returns pseudo-random number between 0 and 1.</p>
+<pre><code>$ mulberry32(69420) 
+▶ 0.5890528310555965
+</code></pre>
+
+<p><strong>numberArrayToString(array&lt;<span>number&gt;) 🡆 string</span></strong><br>
+Takes array of numbers and returns a string using the following characters. ‘ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789’</p>
+<pre><code>$ numberArrayToString([0.69, 0.420, 0.4815162342, 0.5890528310555965])
+▶ 'qadk'
+</code></pre>
+ 
+<p><strong>seedToNumberArray(seed:number, lenght:number) 🡆 array&lt;<span>number&gt;</span></strong><br>
+Takes a seed and a lenght and returns a number array of that lenght.</p>
+<pre><code>$ seedToNumberArray(69, 6)
+▶ [0.7964120346587151, 0.9098359290510416, 0.12758133537136018, 0.7879517334513366, 0.7471530991606414, 0.7873547316994518]
+</code></pre>
+
+<p><strong>passwordToSeed(string) 🡆 number</strong><br>
+Takes a string and returns a number seed.</p>
+<pre><code>$ passwordToSeed('hey mom')
+▶ 30803286948406630
+</code></pre>
+ 
+<p><strong>randomString(number) 🡆 string</strong><br>
+Takes lenght and returns string of that length with the following characters:<br>
+‘ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789’</p>
+<pre><code>$ randomString(69)
+▶ 'M0zlj7PFFQncz24zZpg4ABAkKIMkIagYDIcw1BXMg7R2Trh4Lm2F2Up7NvgP9LHA5z0MG'
+</code></pre>
+ 
+<p><strong>utf8toByteArray(string) 🡆 byte array</strong> <br>
+Takes UTF-8 encoded string and returns its byte array.</p>
+<pre><code>$ utf8toByteArray('hippity dippity')
+▶ Uint8Array(15) [104, 105, 112, 112, 105, 116, 121, 32, 100, 105, 112, 112, 105, 116, 121, buffer: ArrayBuffer(15), byteLength: 15, byteOffset: 0, length: 15, Symbol(Symbol.toStringTag): 'Uint8Array']
+</code></pre>
+ 
+<p><strong>byteArrayToUtf8(byte array) 🡆 string</strong> <br>
+Takes bytes array and encodes it to Unicode (UTF-8) string.</p>
+<pre><code>$ byteArrayToUtf8([104, 105, 112, 112, 105, 116, 121, 32, 100, 105, 112, 112, 105, 116, 121)
+▶ 'hippity dippity'
+</code></pre>
+ 
+<p><strong>xorEncrypt(byte array, byte array) 🡆 byte array</strong> <br>
+Encrypts a byte array using XOR logical operation and key of the same length. </p>
+<pre><code>$ xorEncrypt([4,8,15,16,23,42],[30,60,90,120,150,180])
+▶ [26, 52, 85, 104, 129, 158]
+</code></pre>
+ 
+<p><strong>utf8ToBase64(unicode string) 🡆 B64 string</strong>   <br>
+Converts a UTF-8 encoded string to base 64.   </p>
+<pre><code>$ utf8ToBase64('i am iron man')
+▶ 'aSBhbSBpcm9uIG1hbg=='
+</code></pre>
+ 
+<p><strong>base64ToUtf8(B64 string) 🡆 UTF-8 string</strong><br>
+Converts a base 64 encoded string to Unicode (UTF-8).</p>
+<pre><code>$ base64ToUtf8('aSBhbSBpcm9uIG1hbg==')
+▶ 'i am iron man'
+</code></pre>
+ 
+<h2 id="stolen-borrowed-code"><s>Stolen</s> borrowed code:</h2>
+<p>mulberry32 =&gt; <a href="https://gist.github.com/tommyettinger/46a874533244883189143505d203312c"><strong>Tommy Ettinger</strong></a> + <a href="https://stackoverflow.com/questions/521295/seeding-the-random-number-generator-in-javascript"><strong>bryc</strong></a> for javascript implementation<br>
+utf8ToBase64, base64ToUtf8 =&gt; <a href="https://stackoverflow.com/questions/30106476/using-javascripts-atob-to-decode-base64-doesnt-properly-decode-utf-8-strings"><strong>brandonscript</strong></a></p>
+</div>
+</body>
+
+</html>
