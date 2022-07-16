@@ -52,7 +52,7 @@ document.addEventListener("DOMContentLoaded", () => {
     element("online").innerHTML = "Online users: " + users;
   });
 
-  element("send-message").addEventListener("click", sendMessage());
+  element("send-message").addEventListener("click", sendMessage);
 
   element("message").addEventListener("keypress", (e) =>{
     if(e.key === 'Enter'){
