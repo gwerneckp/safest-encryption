@@ -3,7 +3,6 @@ const { Server } = require("socket.io");
 const http = require("http");
 const https = require("https");
 const fs = require("fs");
-const path = require("path");
 
 const httpPort = 80;
 const httpsPort = 443;
