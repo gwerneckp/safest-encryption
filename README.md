@@ -107,8 +107,8 @@ Converts a UTF-8 encoded string to base 64.   </br>
     ▶ 'aSBhbSBpcm9uIG1hbg=='
 </br> 
    
-**base64ToUtf8(B64 string) 🡆 UTF-8 string**
-Converts a base 64 encoded string to Unicode (UTF-8).
+**base64ToUtf8(B64 string) 🡆 UTF-8 string**</br> 
+Converts a base 64 encoded string to Unicode (UTF-8).</br> 
 
     $ base64ToUtf8('aSBhbSBpcm9uIG1hbg==')
     ▶ 'i am iron man'
