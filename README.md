@@ -89,7 +89,7 @@ Takes UTF-8 encoded string and returns its byte array.</br>
 **byteArrayToUtf8(byte array) 🡆 string** </br> 
 Takes bytes array and encodes it to Unicode (UTF-8) string.</br>
 
-    $ byteArrayToUtf8([104, 105, 112, 112, 105, 116, 121, 32, 100, 105, 112, 112, 105, 116, 121)
+    $ byteArrayToUtf8([104, 105, 112, 112, 105, 116, 121, 32, 100, 105, 112, 112, 105, 116, 121])
     ▶ 'hippity dippity'
 </br> 
    
