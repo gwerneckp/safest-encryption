@@ -101,6 +101,9 @@ const base64ToUtf8 = (b64Encoded) => {
 };
 
 const help = (functionName) => {
+  if (typeof (functionName == "function")) {
+    functionName = functionName.name;
+  }
   switch (functionName) {
     case "mulberry32":
       console.log(`mulberry32(number) 🡆 number
@@ -192,4 +195,4 @@ Written by Gabriel Werneck Paiva`);
 };
 
 console.log("Loaded encryption.js module");
-console.log("Run help() for help");
+console.log("Run help('function') for help");
